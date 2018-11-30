@@ -1,10 +1,13 @@
 package com.example.marcosfilho.placar;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,14 +19,64 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void changeName(View view){
+    public void changeNameTeamA(View view){
 
+        final MainActivity that = this;
+        final TextView nameA = findViewById(R.id.time1);
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-        builder1.setMessage("Vou por o esquema de trocar o nome. Calma.");
+        builder1.setMessage("Aqui é o nome de quem ganha");
         builder1.setCancelable(true);
+
+        final EditText input = new EditText(this);
+        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+
+        builder1.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                that.setName(nameA, input.getText().toString());
+            }
+        });
+
+        builder1.setView(input);
 
         AlertDialog alert11 = builder1.create();
         alert11.show();
+    }
+
+    public void changeNameTeamB(View view){
+
+        final MainActivity that = this;
+        final TextView nameB = findViewById(R.id.time2);
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("Coloca o nome dos marreco");
+        builder1.setCancelable(true);
+
+        final EditText input = new EditText(this);
+        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+
+        builder1.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                that.setName(nameB, input.getText().toString());
+            }
+        });
+
+        builder1.setView(input);
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
+    private void setName(TextView name, String newName){
+        System.out.println("newName");
+        System.out.println(newName);
+        System.out.println("newName");
+        if(newName != "" && newName != null){
+            name.setText(newName);
+        }
+
     }
 
 
