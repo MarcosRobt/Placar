@@ -6,8 +6,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
         builder1.setView(input);
 
-        AlertDialog alert11 = builder1.create();
-        alert11.show();
+
+        builder1.show();
     }
 
     public void changeNameTeamB(View view){
@@ -65,8 +68,24 @@ public class MainActivity extends AppCompatActivity {
 
         builder1.setView(input);
 
-        AlertDialog alert11 = builder1.create();
-        alert11.show();
+        builder1.show();
+    }
+
+    public void showInfo(View view){
+
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.custom_about, null);
+        alertLayout.findViewById(R.id.top);
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+
+        // this is set the view from XML inside AlertDialog
+        builder1.setView(alertLayout);
+        // disallow cancel of AlertDialog on click of back button and outside touch
+        builder1.setCancelable(true);
+        builder1.show();
+
+
+
     }
 
     private void setName(TextView name, String newName){
@@ -91,8 +110,7 @@ public class MainActivity extends AppCompatActivity {
         builder1.setMessage("Acabou! Vamos jogar mais uma!");
         builder1.setCancelable(true);
 
-        AlertDialog alert11 = builder1.create();
-        alert11.show();
+        builder1.show();
     }
 
     private int getPonto(){
