@@ -2,15 +2,12 @@ package com.example.marcosfilho.placar;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,15 +22,18 @@ public class MainActivity extends AppCompatActivity {
     public void changeNameTeamA(View view){
 
         final MainActivity that = this;
-        final TextView nameA = findViewById(R.id.time1);
+
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.custom_team_name, null);
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-        builder1.setMessage("Aqui é o nome de quem ganha");
+        builder1.setView(alertLayout);
         builder1.setCancelable(true);
 
-        final EditText input = new EditText(this);
-        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-
+        final TextView nameA = this.findViewById(R.id.time1);
+        final TextView message = alertLayout.findViewById(R.id.team_message);
+        message.setText("Aqui é o nome de quem ganha");
+        final EditText input = alertLayout.findViewById(R.id.name_team);
+        input.setText(nameA.getText());
         builder1.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -41,32 +41,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        builder1.setView(input);
-
-
         builder1.show();
     }
 
     public void changeNameTeamB(View view){
 
         final MainActivity that = this;
-        final TextView nameB = findViewById(R.id.time2);
+
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.custom_team_name, null);
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-        builder1.setMessage("Coloca o nome dos marreco");
+        builder1.setView(alertLayout);
         builder1.setCancelable(true);
 
-        final EditText input = new EditText(this);
-        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-
+        final TextView nameB = this.findViewById(R.id.time2);
+        final TextView message = alertLayout.findViewById(R.id.team_message);
+        message.setText("Coloca o nome dos marreco");
+        final EditText input = alertLayout.findViewById(R.id.name_team);
+        input.setText(nameB.getText());
         builder1.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 that.setName(nameB, input.getText().toString());
             }
         });
-
-        builder1.setView(input);
 
         builder1.show();
     }
@@ -75,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         LayoutInflater inflater = getLayoutInflater();
         View alertLayout = inflater.inflate(R.layout.custom_about, null);
-        alertLayout.findViewById(R.id.top);
+       // alertLayout.findViewById(R.id.top);
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
 
         // this is set the view from XML inside AlertDialog
@@ -83,8 +81,6 @@ public class MainActivity extends AppCompatActivity {
         // disallow cancel of AlertDialog on click of back button and outside touch
         builder1.setCancelable(true);
         builder1.show();
-
-
 
     }
 
