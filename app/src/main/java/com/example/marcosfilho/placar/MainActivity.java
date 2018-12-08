@@ -102,12 +102,18 @@ public class MainActivity extends AppCompatActivity {
         teamA.setText("0");
         teamB.setText("0");
 
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.custom_end_game, null);
+        // alertLayout.findViewById(R.id.top);
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-        builder1.setMessage("Acabou! Vamos jogar mais uma!");
-        builder1.setCancelable(true);
 
+        // this is set the view from XML inside AlertDialog
+        builder1.setView(alertLayout);
+        // disallow cancel of AlertDialog on click of back button and outside touch
+        builder1.setCancelable(true);
         builder1.show();
-    }
+
+     }
 
     private int getPonto(){
 
