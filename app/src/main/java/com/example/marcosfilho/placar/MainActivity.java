@@ -1,6 +1,10 @@
 package com.example.marcosfilho.placar;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -115,6 +119,38 @@ public class MainActivity extends AppCompatActivity {
 
      }
 
+    public static String FACEBOOK_URL = "https://www.facebook.com/AtleticaFatecOz/";
+    public static String FACEBOOK_PAGE_ID = "AtleticaFatecOz/";
+
+    //method to get the right URL to use in the intent
+    public String getFacebookPageURL(Context context) {
+        PackageManager packageManager = context.getPackageManager();
+        try {
+            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
+            if (versionCode >= 3002850) { //newer versions of fb app
+                return "fb://facewebmodal/f?href=" + FACEBOOK_URL;
+            } else { //older versions of fb app
+                return "fb://page/" + FACEBOOK_PAGE_ID;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            return FACEBOOK_URL; //normal web url
+        }
+    }
+
+     public void openFacebook(View view){
+         Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+
+         String facebookUrl = getFacebookPageURL(this);
+         facebookIntent.setData(Uri.parse(facebookUrl));
+         startActivity(facebookIntent);
+     }
+
+    public void openInstagram(View view){
+        Intent instagramIntent = new Intent(Intent.ACTION_VIEW);
+        instagramIntent.setData(Uri.parse("https://www.instagram.com/atleticafatecosasco/"));
+        startActivity(instagramIntent);
+    }
+
     private int getPonto(){
 
         TextView pontoTruco = findViewById(R.id.textView3);
@@ -206,6 +242,9 @@ public class MainActivity extends AppCompatActivity {
         }else if(pontoTruo.getText() == "+9"){
             pontoTruo.setText("+12");
             textoTruco.setText("EITA");
+        }else if(pontoTruo.getText() == "+12"){
+            pontoTruo.setText("");
+            textoTruco.setText("TRUCO!");
         }
 
 
