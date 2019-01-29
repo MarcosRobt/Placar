@@ -1,4 +1,4 @@
-package com.example.marcosfilho.placar;
+package com.marcosfilho.placar;
 
 import org.junit.Test;
 
