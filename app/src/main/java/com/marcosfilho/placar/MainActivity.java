@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
     private String setPonto(int placar, int ponto){
 
         String pontuacao = "";
-        if((placar + ponto) <= 12){
+        if((placar + ponto) <= 11){
             pontuacao = (placar + ponto) + "";
         }else{
             //colocar funcao pra resetar
